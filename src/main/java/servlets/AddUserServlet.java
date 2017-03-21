@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AllUsersServlet extends HttpServlet {
+public class AddUserServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
@@ -17,7 +17,7 @@ public class AllUsersServlet extends HttpServlet {
         Map<String, Object> pageVariables = createPageVariablesMap(request);
         pageVariables.put("message", "");
 
-        response.getWriter().println(PageGenerator.instance().getPage("all_users.html", pageVariables));
+        response.getWriter().println(PageGenerator.instance().getPage("add_user.html", pageVariables));
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
