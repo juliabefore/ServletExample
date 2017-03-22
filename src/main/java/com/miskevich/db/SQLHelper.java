@@ -14,13 +14,11 @@ public class SQLHelper {
 
     public List<User> getAllUsers(PooledConnection pooledConnection){
         List<User> users = new ArrayList<>();
+        String query = "select * from users";
 
-        try {
-            Connection connection = pooledConnection.getConnection();
-
-            String query = "select * from users";
+        try(Connection connection = pooledConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery()){
 
             while (resultSet.next()){
                 User user = new User();
@@ -31,10 +29,10 @@ public class SQLHelper {
                 user.setDateOfBirth(resultSet.getDate(5));
                 users.add(user);
             }
-
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return users;
     }
 }
