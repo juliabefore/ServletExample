@@ -1,4 +1,4 @@
-package templater;
+package com.miskevich.templater;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

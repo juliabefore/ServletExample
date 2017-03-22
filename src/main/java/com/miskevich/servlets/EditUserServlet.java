@@ -1,7 +1,6 @@
-package servlets;
+package com.miskevich.servlets;
 
-import templater.PageGenerator;
-
+import com.miskevich.templater.PageGenerator;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

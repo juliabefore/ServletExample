@@ -25,7 +25,34 @@
             </div>
 
             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                <p align="center">I'm JM and I do love tulips!</p>
+                <p align="center" style="color: blue; font-weight: bold; font-size: 20px;">List of Users</p>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>LAST_NAME</th>
+                        <th>FIRST_NAME</th>
+                        <th>SALARY</th>
+                        <th>DATE_OF_BIRTH</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <#list users as user>
+                        <tr>
+                                <td>${user.id}</td>
+                                <td>${user.lastName}</td>
+                                <td>${user.firstName}</td>
+                                <td>${user.salary}</td>
+                                <td>${user.dateOfBirth}</td>
+                        </tr>
+                    </#list>
+
+
+                    </tbody>
+                </table>
+
             </div>
 
         </div>

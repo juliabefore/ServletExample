@@ -1,16 +1,26 @@
-package app;
+package com.miskevich.app;
 
+import com.miskevich.db.DBHelper;
+import com.miskevich.servlets.AddUserServlet;
+import com.miskevich.servlets.AllUsersServlet;
+import com.miskevich.servlets.EditUserServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-import servlets.AddUserServlet;
-import servlets.AllUsersServlet;
-import servlets.EditUserServlet;
+
+import javax.sql.PooledConnection;
+
 
 public class MyApp {
 
+    public static PooledConnection pooledConnection;
+
     public static void main(String[] args) throws Exception {
+
+        DBHelper dbHelper = new DBHelper();
+        String connectionPath = dbHelper.connectionMap.get("SERVLET");
+        pooledConnection = dbHelper.getConnectionPool(connectionPath);
 
         AllUsersServlet allUsersServlet = new AllUsersServlet();
         AddUserServlet addUserServlet = new AddUserServlet();
