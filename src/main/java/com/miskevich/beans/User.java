@@ -7,13 +7,13 @@ public class User {
     private int id;
     private String lastName;
     private String firstName;
-    private double salary;
+    private Double salary;
     private Date dateOfBirth;
 
     public User() {
     }
 
-    public User(int id, String lastName, String firstName, double salary, Date dateOfBirth) {
+    public User(int id, String lastName, String firstName, Double salary, Date dateOfBirth) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -45,11 +45,11 @@ public class User {
         this.firstName = firstName;
     }
 
-    public double getSalary() {
+    public Double getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(Double salary) {
         this.salary = salary;
     }
 

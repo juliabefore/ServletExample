@@ -14,13 +14,13 @@ import javax.sql.PooledConnection;
 
 public class MyApp {
 
-    public static PooledConnection pooledConnection;
+    public static PooledConnection pooledConnectionServlet;
 
     public static void main(String[] args) throws Exception {
 
         DBHelper dbHelper = new DBHelper();
         String connectionPath = dbHelper.connectionMap.get("SERVLET");
-        pooledConnection = dbHelper.getConnectionPool(connectionPath);
+        pooledConnectionServlet = dbHelper.getConnectionPool(connectionPath);
 
         AllUsersServlet allUsersServlet = new AllUsersServlet();
         AddUserServlet addUserServlet = new AddUserServlet();

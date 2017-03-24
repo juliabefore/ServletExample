@@ -57,3 +57,8 @@ footer{
 .well{
     height: 180px;
 }
+.headerText{
+    color: blue;
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -3,6 +3,8 @@ package com.miskevich.servlets;
 import com.miskevich.beans.User;
 import com.miskevich.db.SQLHelper;
 import com.miskevich.templater.PageGenerator;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.miskevich.app.MyApp.pooledConnection;
+import static com.miskevich.app.MyApp.pooledConnectionServlet;
 
 public class AllUsersServlet extends HttpServlet {
 
@@ -27,10 +29,14 @@ public class AllUsersServlet extends HttpServlet {
 
     }
 
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
     private Map<String, Object> createPageVariablesMap() {
         Map<String, Object> pageVariables = new HashMap<>();
-        SQLHelper sqlHelper = new SQLHelper();
-        List<User> users = sqlHelper.getAllUsers(pooledConnection);
+        List<User> users = SQLHelper.getAllUsers(pooledConnectionServlet);
         pageVariables.put("users", users);
         return pageVariables;
     }

@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLHelper {
+public abstract class SQLHelper {
 
-    public List<User> getAllUsers(PooledConnection pooledConnection){
+    public static List<User> getAllUsers(PooledConnection pooledConnection){
         List<User> users = new ArrayList<>();
         String query = "select * from users";
 
@@ -25,7 +25,7 @@ public class SQLHelper {
                 user.setId(resultSet.getInt(1));
                 user.setLastName(resultSet.getString(2));
                 user.setFirstName(resultSet.getString(3));
-                user.setSalary(resultSet.getInt(4));
+                user.setSalary(resultSet.getDouble(4));
                 user.setDateOfBirth(resultSet.getDate(5));
                 users.add(user);
             }
