@@ -1,7 +1,9 @@
 package com.miskevich.servlets;
 
 import com.miskevich.beans.User;
+import com.miskevich.db.QueryGenerator;
 import com.miskevich.db.SQLHelper;
+import com.miskevich.enums.HttpMethod;
 import com.miskevich.templater.PageGenerator;
 
 import javax.servlet.ServletException;
@@ -9,12 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.miskevich.app.MyApp.pooledConnectionServlet;
@@ -24,7 +22,7 @@ public class AddUserServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException {
 
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
+        Map<String, Object> pageVariables = createPageVariablesMap(request, HttpMethod.GET);
         pageVariables.put("message", "");
 
         response.getWriter().println(PageGenerator.instance().getPage("add_user.html", pageVariables));
@@ -36,44 +34,57 @@ public class AddUserServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-        Map<String, Object> pageVariables = createPageVariablesMap(request);
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String salary = request.getParameter("salary");
-        String dateOfBirth = request.getParameter("dateOfBirth");
+        Map<String, Object> pageVariables = createPageVariablesMap(request, HttpMethod.POST);
+        System.out.println(pageVariables);
+        String message = request.getParameter("message");
 
         response.setContentType("text/html;charset=utf-8");
 
-        if (firstName == null || firstName.isEmpty() || lastName == null || lastName.isEmpty() || dateOfBirth == null) {
+        if (message == null || message.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         } else {
             response.setStatus(HttpServletResponse.SC_OK);
         }
-
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        java.util.Date date;
-        try {
-            date = df.parse(dateOfBirth);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-        java.sql.Date sqlStartDate = new Date(date.getTime());
-        System.out.println(sqlStartDate);
-        pageVariables.put("firstName", firstName == null ? "" : firstName);
-        pageVariables.put("lastName", lastName == null ? "" : lastName);
-        pageVariables.put("salary", Double.valueOf(salary));
-        pageVariables.put("dateOfBirth", sqlStartDate);
-
-        System.out.println(pageVariables);
-
-        response.getWriter().println(PageGenerator.instance().getPage("all_users.html", pageVariables));
+        response.sendRedirect("/all_users");
     }
 
-    private Map<String, Object> createPageVariablesMap(HttpServletRequest request) {
+    private Map<String, Object> createPageVariablesMap(HttpServletRequest request, HttpMethod method) {
         Map<String, Object> pageVariables = new HashMap<>();
-        List<User> users = SQLHelper.getAllUsers(pooledConnectionServlet);
-        pageVariables.put("users", users);
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        if(method.equals(HttpMethod.POST)){
+            String query = QueryGenerator.createSQLInsert(parameterMap);
+            User user = populateUser(parameterMap);
+            SQLHelper.addUser(pooledConnectionServlet, query, user);
+        }
+
+        pageVariables.put("parameters", parameterMap.toString());
         return pageVariables;
     }
+
+    private User populateUser(Map<String, String[]> parameterMap){
+          User user = new User();
+        for (Map.Entry<String, String[]> entry : parameterMap.entrySet()){
+            String array = Arrays.toString(entry.getValue());
+            String value = "";
+            if(array.length() > 2){
+                value = array.substring(1, array.length() - 1);
+            }
+
+            if(entry.getKey().equals("firstName")){
+                user.setFirstName(value);
+            }else if(entry.getKey().equals("lastName")){
+                user.setLastName(value);
+            }else if(entry.getKey().equals("dateOfBirth")){
+                user.setDateOfBirth(QueryGenerator.convertDate(value));
+            }else if(entry.getKey().equals("salary")){
+                if(!value.isEmpty()){
+                    user.setSalary(Long.valueOf(value));
+                }
+            }
+        }
+          return user;
+    }
+
+
 }

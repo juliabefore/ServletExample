@@ -4,7 +4,6 @@ import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 
 import javax.sql.PooledConnection;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;

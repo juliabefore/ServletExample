@@ -4,7 +4,6 @@ import com.miskevich.beans.User;
 import com.miskevich.db.SQLHelper;
 import com.miskevich.templater.PageGenerator;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,11 +26,6 @@ public class AllUsersServlet extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
 
-    }
-
-    public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 
     private Map<String, Object> createPageVariablesMap() {
