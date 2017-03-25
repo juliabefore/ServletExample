@@ -1,7 +1,7 @@
-package com.miskevich.service;
+package com.miskevich.servletexample.service;
 
-import com.miskevich.beans.User;
-import com.miskevich.db.QueryGenerator;
+import com.miskevich.servletexample.entity.User;
+import com.miskevich.servletexample.db.QueryGenerator;
 
 import java.util.Arrays;
 import java.util.Map;

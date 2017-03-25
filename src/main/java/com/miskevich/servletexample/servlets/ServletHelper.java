@@ -1,4 +1,4 @@
-package com.miskevich.servlets;
+package com.miskevich.servletexample.servlets;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

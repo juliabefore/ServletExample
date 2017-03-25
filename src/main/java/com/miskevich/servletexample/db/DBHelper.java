@@ -1,4 +1,4 @@
-package com.miskevich.db;
+package com.miskevich.servletexample.db;
 
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 

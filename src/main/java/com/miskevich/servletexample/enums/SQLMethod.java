@@ -1,4 +1,4 @@
-package com.miskevich.enums;
+package com.miskevich.servletexample.enums;
 
 public enum SQLMethod {
     INSERT("INSERT"),

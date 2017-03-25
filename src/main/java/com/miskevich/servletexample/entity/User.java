@@ -1,4 +1,4 @@
-package com.miskevich.beans;
+package com.miskevich.servletexample.entity;
 
 import java.sql.Date;
 

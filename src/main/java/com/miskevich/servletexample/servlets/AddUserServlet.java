@@ -1,12 +1,12 @@
-package com.miskevich.servlets;
+package com.miskevich.servletexample.servlets;
 
-import com.miskevich.beans.User;
-import com.miskevich.db.QueryGenerator;
-import com.miskevich.db.SQLHelper;
-import com.miskevich.enums.HttpMethod;
-import com.miskevich.enums.SQLMethod;
-import com.miskevich.service.UserService;
-import com.miskevich.templater.PageGenerator;
+import com.miskevich.servletexample.entity.User;
+import com.miskevich.servletexample.db.QueryGenerator;
+import com.miskevich.servletexample.db.SQLHelper;
+import com.miskevich.servletexample.enums.HttpMethod;
+import com.miskevich.servletexample.enums.SQLMethod;
+import com.miskevich.servletexample.service.UserService;
+import com.miskevich.servletexample.templater.PageGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.miskevich.app.MyApp.pooledConnectionServlet;
+import static com.miskevich.servletexample.app.MyApp.pooledConnectionServlet;
 
 public class AddUserServlet extends HttpServlet {
 

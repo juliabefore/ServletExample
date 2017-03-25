@@ -1,7 +1,7 @@
-package com.miskevich.db;
+package com.miskevich.servletexample.db;
 
-import com.miskevich.beans.User;
-import com.miskevich.enums.SQLMethod;
+import com.miskevich.servletexample.entity.User;
+import com.miskevich.servletexample.enums.SQLMethod;
 import org.sql2o.tools.NamedParameterStatement;
 import javax.sql.PooledConnection;
 import java.sql.*;

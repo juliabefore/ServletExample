@@ -1,6 +1,6 @@
-package com.miskevich.db;
+package com.miskevich.servletexample.db;
 
-import com.miskevich.enums.SQLMethod;
+import com.miskevich.servletexample.enums.SQLMethod;
 
 import java.sql.Date;
 import java.text.DateFormat;

@@ -1,9 +1,9 @@
-package com.miskevich.app;
+package com.miskevich.servletexample.app;
 
-import com.miskevich.db.DBHelper;
-import com.miskevich.servlets.AddUserServlet;
-import com.miskevich.servlets.AllUsersServlet;
-import com.miskevich.servlets.EditUserServlet;
+import com.miskevich.servletexample.db.DBHelper;
+import com.miskevich.servletexample.servlets.AddUserServlet;
+import com.miskevich.servletexample.servlets.AllUsersServlet;
+import com.miskevich.servletexample.servlets.EditUserServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
