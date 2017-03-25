@@ -18,9 +18,8 @@
         <div class="row">
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                 <ul class="nav nav-pills nav-stacked">
-                    <li role="presentation" class="active"><a href="/all_users">All users</a></li>
-                    <li role="presentation"><a href="/add_user">Add user</a></li>
-                    <li role="presentation"><a href="/edit_user">Edit user</a></li>
+                    <li role="presentation" class="active"><a href="/user/all">All users</a></li>
+                    <li role="presentation"><a href="/user/add">Add user</a></li>
                 </ul>
             </div>
 
@@ -41,11 +40,11 @@
 
                     <#list users as user>
                         <tr>
-                                <td>${user.id}</td>
-                                <td>${user.lastName}</td>
-                                <td>${user.firstName}</td>
-                                <td>${user.salary}</td>
-                                <td>${user.dateOfBirth}</td>
+                            <td><a href="/user/edit/${user.id}">${user.id}</a></td>
+                            <td>${user.lastName}</td>
+                            <td>${user.firstName}</td>
+                            <td>${user.salary}</td>
+                            <td>${user.dateOfBirth}</td>
                         </tr>
                     </#list>
 

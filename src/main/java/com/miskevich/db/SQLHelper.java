@@ -1,8 +1,8 @@
 package com.miskevich.db;
 
 import com.miskevich.beans.User;
+import com.miskevich.enums.SQLMethod;
 import org.sql2o.tools.NamedParameterStatement;
-
 import javax.sql.PooledConnection;
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,8 +34,32 @@ public abstract class SQLHelper {
         return users;
     }
 
-    public static void addUser(PooledConnection pooledConnection, String query, User user){
+    public static User getUserById(PooledConnection pooledConnection, int id){
+        User user = new User();
+        String query = "SELECT id, firstName, lastName, salary, dateOfBirth FROM users WHERE id = :id";
+        try(Connection connection = pooledConnection.getConnection()){
+            NamedParameterStatement namedParameterStatement = new NamedParameterStatement(connection, query, false);
+            namedParameterStatement.setInt("id", id);
+            ResultSet resultSet = namedParameterStatement.executeQuery();
 
+            while (resultSet.next()){
+                user.setId(resultSet.getInt(1));
+                user.setFirstName(resultSet.getString(2));
+                user.setLastName(resultSet.getString(3));
+                user.setSalary(resultSet.getLong(4));
+                user.setDateOfBirth(resultSet.getDate(5));
+            }
+
+            resultSet.close();
+            namedParameterStatement.close();
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return user;
+    }
+
+    public static void changeUser(PooledConnection pooledConnection, String query, User user, SQLMethod method){
         try(Connection connection = pooledConnection.getConnection()){
             NamedParameterStatement namedParameterStatement = new NamedParameterStatement(connection, query, false);
             namedParameterStatement.setString("firstName", user.getFirstName());
@@ -47,14 +71,14 @@ public abstract class SQLHelper {
             }else {
                 namedParameterStatement.setLong("salary", user.getSalary());
             }
-
-
+            if(method.equals(SQLMethod.UPDATE)){
+                namedParameterStatement.setInt("id", user.getId());
+            }
             namedParameterStatement.execute();
+            namedParameterStatement.close();
 
         }catch (SQLException e){
-                throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
-
-
     }
 }
