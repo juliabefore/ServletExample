@@ -1,6 +1,6 @@
 package com.miskevich.servletexample.app;
 
-import com.miskevich.servletexample.db.DBHelper;
+import com.miskevich.servletexample.db.core.DBHelper;
 import com.miskevich.servletexample.servlets.AddUserServlet;
 import com.miskevich.servletexample.servlets.AllUsersServlet;
 import com.miskevich.servletexample.servlets.EditUserServlet;

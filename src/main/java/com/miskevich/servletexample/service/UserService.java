@@ -1,12 +1,14 @@
 package com.miskevich.servletexample.service;
 
 import com.miskevich.servletexample.entity.User;
-import com.miskevich.servletexample.db.QueryGenerator;
+import com.miskevich.servletexample.db.core.QueryGenerator;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class UserService {
+
     public static User populateUser(Map<String, String[]> parameterMap){
         User user = new User();
         for (Map.Entry<String, String[]> entry : parameterMap.entrySet()){
@@ -29,5 +31,15 @@ public abstract class UserService {
             }
         }
         return user;
+    }
+
+    public static Map<String, Object> generateParamsForQuery(User user){
+        Map<String, Object> param = new HashMap<>();
+        param.put(":id", user.getId());
+        param.put(":firstName", user.getFirstName().trim());
+        param.put(":lastName", user.getLastName().trim());
+        param.put(":salary", user.getSalary());
+        param.put(":dateOfBirth", user.getDateOfBirth());
+        return param;
     }
 }

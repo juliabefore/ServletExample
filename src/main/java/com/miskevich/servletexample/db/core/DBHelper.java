@@ -1,4 +1,4 @@
-package com.miskevich.servletexample.db;
+package com.miskevich.servletexample.db.core;
 
 import com.mysql.cj.jdbc.MysqlConnectionPoolDataSource;
 
@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class DBHelper {
 
-    public Map<String, String> connectionMap;
+    public final Map<String, String> connectionMap;
 
     public DBHelper() {
         connectionMap = new HashMap<>();

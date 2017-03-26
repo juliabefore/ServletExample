@@ -1,7 +1,7 @@
 package com.miskevich.servletexample.servlets;
 
 import com.miskevich.servletexample.entity.User;
-import com.miskevich.servletexample.db.SQLHelper;
+import com.miskevich.servletexample.db.core.SQLHelper;
 import com.miskevich.servletexample.templater.PageGenerator;
 
 import javax.servlet.http.HttpServlet;

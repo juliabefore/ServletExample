@@ -1,4 +1,4 @@
-package com.miskevich.servletexample.db;
+package com.miskevich.servletexample.db.core;
 
 import com.miskevich.servletexample.enums.SQLMethod;
 

@@ -1,8 +1,8 @@
 package com.miskevich.servletexample.servlets;
 
 import com.miskevich.servletexample.entity.User;
-import com.miskevich.servletexample.db.QueryGenerator;
-import com.miskevich.servletexample.db.SQLHelper;
+import com.miskevich.servletexample.db.core.QueryGenerator;
+import com.miskevich.servletexample.db.core.SQLHelper;
 import com.miskevich.servletexample.enums.HttpMethod;
 import com.miskevich.servletexample.enums.SQLMethod;
 import com.miskevich.servletexample.service.UserService;
